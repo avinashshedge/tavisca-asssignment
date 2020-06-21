@@ -1,0 +1,20 @@
+<div class="row mt-4">
+    <label for="size" class="col-sm-2"> <b>{{header}}</b></label>
+    <div class="col-sm-4">
+         <div class="row">
+             <table class="table">
+                <tbody *ngFor="let item of data;">
+                 <td>
+                    <input type="checkbox" class="form-check-input" [checked]="isDefaultSelection(item)" (change)="onSelect($event,item)">            
+                 </td>
+                 <td>
+                    <label class="form-check-label">{{item.name}}</label>
+                 </td>
+                 <td>
+                    <label class="form-check-label">Rs {{item.price}}</label>
+                 </td>
+                </tbody>
+             </table>
+         </div>
+    </div>
+</div>

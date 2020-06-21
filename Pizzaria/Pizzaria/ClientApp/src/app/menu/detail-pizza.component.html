@@ -1,0 +1,69 @@
+<div *ngIf="selectedPizza != null">
+
+
+<div class="row md-2">
+    <div class="card col-md-4" style="margin: 5px;">
+        <img src="{{selectedPizza.imageUrl}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">
+            <div style="width: 20px;height: 20px;border-radius: 4px;float: left;margin-right: 10px;"
+                [ngStyle]="{'background-color': selectedPizza.type =='veg' ? 'green' :'red' }">            
+            </div>  
+            <div>
+               <b> {{selectedPizza.name}} </b>
+            </div>
+            </h5>
+          
+          <h6 class="card-title">Rs {{selectedPizza.baseprice}}</h6>
+
+        </div>
+      </div>
+</div>
+<div class="row mt-4">
+    <label for="size" class="col-sm-2"> <b>Pizza Size </b></label>
+    <div class="col-sm-10">
+        <ul class="list-group list-group-horizontal">
+            <li class="list-group-item" 
+                [ngClass]="{'active': selectedPizzaSize == item.id }" 
+                (click)="onSelectPizzaSize($event, item)" *ngFor="let item of pizzaSizes;">
+                {{ item.name }}
+                <span class="badge badge-primary badge-pill">Rs {{item.price}}</span>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="row mt-4">
+    <label for="size" class="col-sm-2"> <b>Crush Type </b></label>
+    <div class="col-sm-10">
+    <ul class="list-group list-group-horizontal">
+        <li class="list-group-item" 
+            [ngClass]="{'active': selectedCrushType == item.id}" 
+            (click)="onSelectCrushType($event, item)" *ngFor="let item of crushTypes;">
+            {{ item.name }}
+            <span class="badge badge-primary badge-pill"> Rs {{item.price}}</span>
+         </li>
+      </ul>
+    </div>
+</div>
+<div class="row mt-4">
+    <label for="size" class="col-sm-2"> <b>Extra Cheese </b></label>
+    <div class="col-sm-10">
+        <div class="col-md-8">
+            <input type="checkbox" class="form-check-input" (change)="onExtraCheese($event)">
+            <label class="form-check-label">Rs {{extraCheeseItem?.price}}</label>
+        </div>
+    </div>    
+</div>
+<sub-item [header]="'Add Ingridients'" 
+          [data]="ingridients" 
+          [defaultData]="selectedPizza.defaultIngridient"
+          (onItemClick)="updateTotalOnIngridient($event)"></sub-item>
+
+
+<sub-item [header]="'Add Toppings'" 
+          [data]="toppings"
+          (onItemClick)="updateTotalOnToppings($event)"></sub-item>
+
+<input type="button" class="btn btn-primary" (click)="onAdd()" value="Order">
+
+</div>
